@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
 const app = express();
+require('dotenv').config();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -10,10 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Gaya@031',
-  database: 'sports_db',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   multipleStatements: true
 });
 
