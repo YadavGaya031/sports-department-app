@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Return Items</title></head>
+<body>
+  <h1>Return Issued Items</h1>
+  <form action="/return" method="POST">
+    <select name="record_id" required>
+      <option disabled selected>Select Issued Record</option>
+      <% records.forEach(r => { %>
+        <option value="<%= r.record_id %>">
+          Record <%= r.record_id %> - Student ID <%= r.stud_id %> - Issued on <%= r.date_of_issue.toISOString().slice(0,10) %>
+        </option>
+      <% }) %>
+    </select>
+    <input name="date_of_return" type="date" required />
+    <button type="submit">Submit Return</button>
+  </form>
+</body>
+</html>

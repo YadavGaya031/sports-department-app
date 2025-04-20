@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Student Record</title></head>
+<body>
+  <h1>Issue History for Student ID: <%= stud_id %></h1>
+  <% if (records.length === 0) { %>
+    <p>No records found for this student.</p>
+  <% } else { %>
+    <table border="1">
+      <tr>
+        <th>Record ID</th>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Issue Date</th>
+        <th>Return Date</th>
+      </tr>
+      <% records.forEach(r => { %>
+        <tr>
+          <td><%= r.record_id %></td>
+          <td><%= r.item_name %></td>
+          <td><%= r.quantity_issued %></td>
+          <td><%= r.date_of_issue.toISOString().slice(0,10) %></td>
+          <td><%= r.date_of_return ? r.date_of_return.toISOString().slice(0,10) : 'Not Returned' %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+</body>
+</html>

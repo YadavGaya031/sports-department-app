@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head><title>Issue Items</title></head>
+<body>
+  <h1>Issue Items</h1>
+  <form action="/issue" method="POST" onsubmit="return prepareItems()">
+    <input name="record_id" placeholder="Record ID" required />
+    <select name="stud_id" required>
+      <option disabled selected>Select Student</option>
+      <% students.forEach(s => { %>
+        <option value="<%= s.stud_id %>"><%= s.name %> (ID: <%= s.stud_id %>)</option>
+      <% }) %>
+    </select>
+    <input name="staff_incharge" placeholder="Staff In-Charge" required />
+    <input name="date_of_issue" type="date" required />
+
+    <h3>Select Items to Issue</h3>
+    <div id="itemList">
+      <% items.forEach(i => { %>
+        <div>
+          <label>
+            <input type="checkbox" value="<%= i.item_id %>" data-name="<%= i.item_name %>" data-quantity="<%= i.quantity_available %>" onchange="toggleItem(this)">
+            <%= i.item_name %> (Available: <%= i.quantity_available %>)
+          </label>
+          <input type="number" min="1" max="<%= i.quantity_available %>" placeholder="Qty" data-id="<%= i.item_id %>" disabled />
+        </div>
+      <% }) %>
+    </div>
+
+    <input type="hidden" name="items" id="itemsJSON" />
+    <button type="submit">Issue</button>
+  </form>
+
+  <script>
+    function toggleItem(checkbox) {
+      const input = document.querySelector(`input[data-id='${checkbox.value}']`);
+      input.disabled = !checkbox.checked;
+    }
+
+    function prepareItems() {
+      const checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+      const items = [];
+      checkboxes.forEach(cb => {
+        const qtyInput = document.querySelector(`input[data-id='${cb.value}']`);
+        if (qtyInput.value > 0) {
+          items.push({ item_id: cb.value, quantity: qtyInput.value });
+        }
+      });
+      document.getElementById('itemsJSON').value = JSON.stringify(items);
+      return true;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>All Records</title></head>
+<body>
+  <h1>All Issue Records</h1>
+  <table border="1">
+    <tr>
+      <th>Record ID</th>
+      <th>Student</th>
+      <th>Staff In-Charge</th>
+      <th>Issue Date</th>
+      <th>Return Date</th>
+    </tr>
+    <% records.forEach(r => { %>
+      <tr>
+        <td><%= r.record_id %></td>
+        <td><%= r.student_name %> (ID: <%= r.stud_id %>)</td>
+        <td><%= r.staff_incharge %></td>
+        <td><%= r.date_of_issue.toISOString().slice(0,10) %></td>
+        <td><%= r.date_of_return ? r.date_of_return.toISOString().slice(0,10) : 'Not Returned' %></td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>

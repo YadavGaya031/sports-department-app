@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Items</title></head>
+<body>
+  <h1>Item Inventory</h1>
+  <form action="/items/add" method="POST">
+    <h3>Add New Item</h3>
+    <input name="item_id" placeholder="Item ID" required />
+    <input name="item_name" placeholder="Item Name" required />
+    <input name="quantity_available" placeholder="Quantity" required />
+    <button type="submit">Add Item</button>
+  </form>
+  <h3>Available Items</h3>
+  <ul>
+    <% items.forEach(i => { %>
+      <li><%= i.item_name %> - <%= i.quantity_available %> available</li>
+    <% }) %>
+  </ul>
+</body>
+</html>

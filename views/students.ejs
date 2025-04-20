@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Students</title></head>
+<body>
+  <h1>Student List</h1>
+  <form action="/students/add" method="POST">
+    <h3>Add New Student</h3>
+    <input name="stud_id" placeholder="ID" required />
+    <input name="name" placeholder="Name" required />
+    <input name="branch" placeholder="Branch" required />
+    <input name="year" placeholder="Year" required />
+    <input name="contact_no" placeholder="Contact No" required />
+    <input name="sports_id" placeholder="Sports ID" />
+    <label><input type="checkbox" name="isHosteller" /> Hosteller</label>
+    <label><input type="checkbox" name="isSportStudent" /> Sports Student</label>
+    <button type="submit">Add Student</button>
+  </form>
+  <h3>Existing Students</h3>
+  <ul>
+    <% students.forEach(s => { %>
+      <li><%= s.stud_id %> - <%= s.name %> (<%= s.branch %>, Year <%= s.year %>)</li>
+    <% }) %>
+  </ul>
+</body>
+</html>
